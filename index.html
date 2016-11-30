@@ -195,11 +195,18 @@
                     </label>
 
                     <div class="item " ng-hide="registered" >
+                        <!-- <form action="http://api.file-dog.shatkonlabs.com/files/rahul" method="post" enctype="multipart/form-data">
+                            Profile Pic
+                            <input type="file" name="fileToUpload" id="fileToUpload">
+                            <input type="submit" value="Upload Image" name="submit">
+                        </form> -->
                         Profile Pic
-                        <a class="button pull-right"  ng-click="takePicture();"><span
-                                class="icon ion-android-camera large calm"></span></a>
-                        <a class="button pull-right" ng-click="selectPicture()"><span
-                                class="icon ion-images large calm"></span></a>
+                        <!-- <a class="button pull-right"  ng-click="takePicture();"><span
+                                class="icon ion-android-camera large calm"></span></a> -->
+                        <input type="file" name="myImage" id="myImage" >
+                        <a class="button" ng-click="uploadPicture()" >
+                            <span class="icon ion-images large calm"></span>
+                        </a>
                         <i class="icon ion-checkmark-circled balanced" ng-show="(user.profile_pic_id != 0)"></i>
                     </div>
 

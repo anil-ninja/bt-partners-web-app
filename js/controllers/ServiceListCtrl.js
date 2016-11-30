@@ -4,8 +4,8 @@
 angular.module('starter.controllers')
 
     .controller('ServiceListCtrl',
-        [ '$scope', '$state', '$ionicPopup', '$ionicLoading', '$ionicHistory', '$localstorage', '$ionicSlideBoxDelegate', '$cordovaToast','$cordovaDevice','BlueTeam',
-            function ($scope, $state, $ionicPopup, $ionicLoading, $ionicHistory, $localstorage, $ionicSlideBoxDelegate, $cordovaToast, $cordovaDevice, BlueTeam) {
+        [ '$scope', '$state', '$ionicPopup', '$ionicLoading', '$ionicHistory', '$localstorage', '$ionicSlideBoxDelegate', '$cordovaToast','BlueTeam',
+            function ($scope, $state, $ionicPopup, $ionicLoading, $ionicHistory, $localstorage, $ionicSlideBoxDelegate, $cordovaToast, BlueTeam) {
 
                 //JSON.parse()
 

@@ -5,7 +5,7 @@ angular.module('starter.controllers')
 
 
     .controller('RegCtrl', function ($scope, $state, $ionicLoading, $timeout, $ionicHistory, $cordovaGeolocation, $localstorage,
-                                     PhoneContactsFactory, $ionicPlatform, $cordovaDevice, $window, $cordovaLocalNotification, $cordovaCamera, BlueTeam) {
+                                     PhoneContactsFactory, $ionicPlatform,  $window, $cordovaLocalNotification,  BlueTeam) {
 
 
         console.log("regcont started");
@@ -85,8 +85,8 @@ angular.module('starter.controllers')
 
                         "gps_location": $scope.position.coords.latitude + ',' + $scope.position.coords.longitude,
                         "mobile": $scope.user.mobile,
-                        "password": $scope.user.password,
-                        "device_id": $cordovaDevice.getUUID()
+                        "password": $scope.user.password/*,
+                        "device_id": $cordovaDevice.getUUID()*/
 
 
                 })
@@ -175,7 +175,7 @@ angular.module('starter.controllers')
 
             //$scope.scheduleSingleNotification();
 
-            $scope.findContact = function () {
+            /*$scope.findContact = function () {
                 // var fields = ["id", "displayName", "name", "nickname", "phoneNumbers", "emails", "addresses", "ims", "organizations", "birthday", "note", "photos", "categories", "urls"];
 
                 PhoneContactsFactory.find().then(function (contacts) {
@@ -253,7 +253,7 @@ angular.module('starter.controllers')
 
 
                 });
-            };
+            };*/
             //$scope.findContact();
 
 
@@ -273,7 +273,7 @@ angular.module('starter.controllers')
 
 
         $scope.data = {"ImageURI": "Select Image"};
-        $scope.takePicture = function () {
+        /*$scope.takePicture = function () {
             console.log("take Pic Got clicked");
 
             var options = {
@@ -321,14 +321,29 @@ angular.module('starter.controllers')
                 function (err) {
                     $ionicLoading.show({template: 'error...', duration: 500});
                 })
-        };
+        };*/
 
         $scope.uploadPicture = function () {
             $ionicLoading.show({template: 'wait uploading the document, this may take a while ..'});
 
-            var fileURL = $scope.picData;
-
-            var options = new FileUploadOptions();
+            //var fileURL = $scope.picData;
+            var _fileURL = document.getElementById('myImage');
+            var data = new FormData();
+            data.append('fileToUpload', _fileURL.files[0]);
+            var request = new XMLHttpRequest();
+            var responceTx = "";
+            request.onreadystatechange = function(){
+                if(request.readyState == 4){
+                    responceTx = request.response;
+                    console.log(responceTx);
+                    $ionicLoading.hide();
+                    $scope.user.profile_pic_id = JSON.parse(responceTx).file.id;
+                }
+            };
+            request.open('POST', 'http://api.file-dog.shatkonlabs.com/files/rahul');
+            request.send(data);
+             
+            /*var options = new FileUploadOptions();
             options.fileKey = "fileToUpload";
             options.fileName = fileURL.substr(fileURL.lastIndexOf('/') + 1) + ".jpg";
             options.mimeType = "image/jpeg";
@@ -351,14 +366,14 @@ angular.module('starter.controllers')
                     });
                     $ionicLoading.hide();
                 },
-                options);
+                options);*/
         };
         var viewUploadedPictures = function (response) {
             console.log(JSON.stringify(response), "hi", response.response);
             $ionicLoading.show({template: 'trying to load the pic ...'});
-            server = "http://api.file-dog.shatkonlabs.com/files/rahul/" + JSON.parse(response.response).file.id;
+            server = "http://api.file-dog.shatkonlabs.com/files/rahul/" + $scope.user.profile_pic_id;
 
-            $scope.user.profile_pic_id = JSON.parse(response.response).file.id;
+            //$scope.user.profile_pic_id = JSON.parse(response.response).file.id;
 
             $scope.picData = server;
             $scope.ftLoad = true;
@@ -439,7 +454,7 @@ angular.module('starter.controllers')
 
                 $scope.user.location = $scope.position.coords.latitude + ',' + $scope.position.coords.longitude;
                 $scope.user.device = null;
-                $scope.user.device = $cordovaDevice.getUUID();
+                //$scope.user.device = $cordovaDevice.getUUID();
 
                 BlueTeam.regUser($scope.user)
                     .then(function (d) {
