@@ -5,7 +5,7 @@ angular.module('starter.controllers')
 
 
     .controller('RegCtrl', function ($scope, $state, $ionicLoading, $timeout, $ionicHistory, $cordovaGeolocation, $localstorage,
-                                     PhoneContactsFactory, $ionicPlatform,  $window, $cordovaLocalNotification,  BlueTeam) {
+                                     PhoneContactsFactory, $ionicPlatform, $window, $cordovaLocalNotification, $cordovaNetwork, BlueTeam) {
 
 
         console.log("regcont started");
@@ -32,28 +32,11 @@ angular.module('starter.controllers')
         };
 
         var posOptions = {
-            timeout: 10000,
-            enableHighAccuracy: false
+            "enableHighAccuracy": false,
+            "timeout": 60000,
+            "maximumAge": 0
         };
-        $cordovaGeolocation
-            .getCurrentPosition(posOptions)
-            .then(function (position) {
 
-
-                $scope.position = position;
-
-            }, function (err) {
-
-                console.log(JSON.stringify(err));
-                $scope.position = {
-                    "coords": {
-                        "longitude": null,
-                        "latitude": null
-                    }
-                };
-
-
-            });
 
 
         $scope.show = function () {
@@ -83,10 +66,10 @@ angular.module('starter.controllers')
             $scope.show();
             BlueTeam.loginUser({
 
-                        "gps_location": $scope.position.coords.latitude + ',' + $scope.position.coords.longitude,
-                        "mobile": $scope.user.mobile,
-                        "password": $scope.user.password/*,
-                        "device_id": $cordovaDevice.getUUID()*/
+                    "gps_location": $scope.position.coords.latitude + ',' + $scope.position.coords.longitude,
+                    "mobile": $scope.user.mobile,
+                    "password": $scope.user.password/*,
+                    "device_id": $cordovaDevice.getUUID()*/
 
 
                 })
@@ -133,7 +116,23 @@ angular.module('starter.controllers')
 
                             });
 
+
+
                             BlueTeam.getCities().then(function (d) {
+                                console.log($scope.position.coords.latitude + ',' + $scope.position.coords.longitude);
+                                if($scope.position.coords.latitude)
+                                    BlueTeam.getLocationDetails($scope.position.coords.latitude + ',' + $scope.position.coords.longitude).then(function (d) {
+                                        $scope.user.city_id = d.location_details.city.id;
+                                        $scope.user.area_id = d.location_details.area.id;
+                                        BlueTeam.getCityAreas($scope.user.city_id).then(function (d) {
+
+                                            $scope.areas = d.areas;
+
+                                            console.log(JSON.stringify($scope.areas));
+
+                                        });
+
+                                    });
 
                                 $scope.cities = d.cities;
                                 console.log(JSON.stringify($scope.serviceProviders));
@@ -159,7 +158,126 @@ angular.module('starter.controllers')
 
         };
 
+        /*$scope.geolocation = false;
+        if(navigator.geolocation) {
+            $scope.geolocation = navigator.geolocation;
+        }*/
+
         $ionicPlatform.ready(function () {
+           /* if($scope.geolocation) {
+                var locationService = $scope.geolocation; // native HTML5 geolocation
+            }
+            else {
+                var locationService = navigator.geolocation; // cordova geolocation plugin
+            }
+
+            locationService.getCurrentPosition(
+                function(pos) {
+                    console.log("location inv",JSON.stringify(pos));
+
+                },
+                function(error) {
+                    console.log("location inv",JSON.stringify(error.__proto__.message))
+
+                },
+                {enableHighAccuracy: false, timeout: 15000}
+            );
+
+            var options = { enableHighAccuracy: false };
+
+            console.log("location by nav",JSON.stringify(
+            navigator.geolocation.getCurrentPosition(function (position) {
+
+
+                $scope.position = position;
+                console.log("location by navigator",JSON.stringify(position));
+
+
+            }, function (err) {
+
+                console.log("error in geting location by navigator",err,JSON.stringify(err.message));
+                $scope.position = {
+                    "coords": {
+                        "longitude": null,
+                        "latitude": null
+                    }
+                };
+
+
+            }, options)));
+
+           */
+            cordova.plugins.diagnostic.isLocationEnabled(function(enabled){
+                console.log("Location setting is " + (enabled ? "enabled" : "disabled"));
+            }, function(error){
+                console.error("The following error occurred: "+error);
+            });
+            cordova.plugins.diagnostic.isLocationAuthorized(function(authorized){
+                console.log("Location is " + (authorized ? "authorized" : "unauthorized"));
+            }, function(error){
+                console.error("The following error occurred: "+error);
+            });
+            cordova.plugins.diagnostic.isLocationAvailable(function(available){
+                console.log("Location is " + (available ? "available" : "not available"));
+                $cordovaGeolocation
+                    .getCurrentPosition(posOptions)
+                    .then(function (position) {
+
+
+                        $scope.position = position;
+                        console.log("location",JSON.stringify(position));
+
+
+                    }, function (err) {
+
+                        console.log("error in geting location",err,JSON.stringify(err.message));
+                        $scope.position = {
+                            "coords": {
+                                "longitude": null,
+                                "latitude": null
+                            }
+                        };
+
+
+                    });
+                /*var watchOptions = {
+                    timeout : 3000,
+                    enableHighAccuracy: true // may cause errors if true
+                };
+
+                var watch = $cordovaGeolocation.watchPosition(watchOptions);
+                watch.then(
+                    null,
+                    function(err) {
+                        console.log("error in geting location",err,JSON.stringify(err));
+                        // error
+                    },
+                    function(position) {
+                        $scope.position = position;
+
+                        console.log("location",JSON.stringify(position));
+                        var lat  = position.coords.latitude;
+                        var long = position.coords.longitude;
+                        watch.clearWatch();
+                    });
+
+*/
+
+            }, function(error){
+                console.error("The following error occurred: "+error);
+            });
+
+            if ($cordovaNetwork.isOffline()) {
+
+                $ionicPopup.confirm({
+
+                    title: "Internet is not working",
+
+                    content: "Internet is not working on your device."
+
+                });
+
+            }
             $scope.scheduleSingleNotification = function () {
                 $cordovaLocalNotification.schedule({
                     id: 1,
@@ -326,10 +444,9 @@ angular.module('starter.controllers')
         $scope.uploadPicture = function () {
             $ionicLoading.show({template: 'wait uploading the document, this may take a while ..'});
 
-            //var fileURL = $scope.picData;
-            var _fileURL = document.getElementById('myImage');
+            var fileURL = document.getElementById('myImage');
             var data = new FormData();
-            data.append('fileToUpload', _fileURL.files[0]);
+            data.append('fileToUpload', fileURL.files[0]);
             var request = new XMLHttpRequest();
             var responceTx = "";
             request.onreadystatechange = function(){
@@ -338,42 +455,18 @@ angular.module('starter.controllers')
                     console.log(responceTx);
                     $ionicLoading.hide();
                     $scope.user.profile_pic_id = JSON.parse(responceTx).file.id;
+                    console.log($scope.user.profile_pic_id);
                 }
             };
             request.open('POST', 'http://api.file-dog.shatkonlabs.com/files/rahul');
             request.send(data);
-             
-            /*var options = new FileUploadOptions();
-            options.fileKey = "fileToUpload";
-            options.fileName = fileURL.substr(fileURL.lastIndexOf('/') + 1) + ".jpg";
-            options.mimeType = "image/jpeg";
-            options.chunkedMode = true;
-
-            var params = {};
-            params.username = "rahul";
-            params.password = "rahul";
-
-            options.params = params;
-
-            var ft = new FileTransfer();
-            ft.upload(
-                fileURL,
-                encodeURI("http://api.file-dog.shatkonlabs.com/files/rahul"),
-                viewUploadedPictures,
-                function (error) {
-                    $ionicLoading.show({
-                        template: 'Something went wrong ...'
-                    });
-                    $ionicLoading.hide();
-                },
-                options);*/
         };
         var viewUploadedPictures = function (response) {
             console.log(JSON.stringify(response), "hi", response.response);
             $ionicLoading.show({template: 'trying to load the pic ...'});
-            server = "http://api.file-dog.shatkonlabs.com/files/rahul/" + $scope.user.profile_pic_id;
+            server = "http://api.file-dog.shatkonlabs.com/files/rahul/" + JSON.parse(response.response).file.id;
 
-            //$scope.user.profile_pic_id = JSON.parse(response.response).file.id;
+            $scope.user.profile_pic_id = JSON.parse(response.response).file.id;
 
             $scope.picData = server;
             $scope.ftLoad = true;
@@ -405,24 +498,32 @@ angular.module('starter.controllers')
 
                     $scope.hide();
                     $timeout(function () {
-                     $window.location.reload(true);
-                     }, 5000);
+                        $window.location.reload(true);
+                    }, 5000);
 
 
-                     $state.go('tab.service-list');
+                    $state.go('tab.service-list');
 
                 });
         };
 
 
         $scope.regUser = function () {
+            if ($scope.checked == false) {
+                $scope.checkReg();
+                return;
+            }
+            if ($scope.registered) {
+                $scope.login();
+                return;
+            }
 
             if($scope.user.name == ""){
                 $scope.error = "please enter your name";
                 return;
             }
             if($scope.user.profile_pic_id == 0){
-                    $scope.error = "please select your profile picture";
+                $scope.error = "please select your profile picture";
                 return;
             }
 
@@ -439,14 +540,7 @@ angular.module('starter.controllers')
                 return;
             }
             $scope.error = null;
-            if ($scope.checked == false) {
-                $scope.checkReg();
-                return;
-            }
-            if ($scope.registered) {
-                $scope.login();
-                return;
-            }
+
 
             if ($scope.user.password == $scope.user.conf_password) {
 
@@ -499,11 +593,11 @@ angular.module('starter.controllers')
 
 
                         /*$timeout(function () {
-                            $window.location.reload(true);
-                        }, 5000);
+                         $window.location.reload(true);
+                         }, 5000);
 
 
-                        $state.go('tab.service-list');*/
+                         $state.go('tab.service-list');*/
 
                     });
             }
