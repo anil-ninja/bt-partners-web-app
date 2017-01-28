@@ -5,7 +5,8 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'starter.phonecontacts', 'ionic-timepicker', 'ion-datetime-picker','ionic.rating'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services',
+            'ionic-timepicker', 'ngMessages', 'ion-datetime-picker','ionic.rating','chart.js'])
 
     .run(function($ionicPlatform) {
         $ionicPlatform.ready(function() {
@@ -43,25 +44,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
             .state('reg', {
                 url: '/reg',
-
-
                 templateUrl: 'register.html',
                 controller: 'RegCtrl'
-
-
             })
-            .state('survey', {
-                url: '/survey',
-
-
-                templateUrl: 'survey.html',
-                controller: 'SurveyCtrl'
-
-
+            .state('map', {
+                url: '/map',
+                templateUrl: 'map.html',
+                controller: 'MapCtrl'
             })
 
             .state('tab.contact-us', {
-
                 url: '/contact-us',
                 views: {
                     'service-list': {
@@ -69,45 +61,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
                         controller: 'ContactUsCtrl'
                     }
                 }
-
             })
-
-            .state('tab.digieye', {
-
-                url: '/digieye',
-                views: {
-                    'service-list': {
-                        templateUrl: 'templates/digieye.html',
-                        controller: 'DigieyeCtrl'
-                    }
-                }
-
-            })
-
-            .state('tab.register-worker', {
-
-                url: '/register-worker',
-                views: {
-                    'service-list': {
-                        templateUrl: 'templates/register-worker.html',
-                        controller: 'DigieyeCtrl'
-                    }
-                }
-
-            })
-
-            .state('tab.view-workers', {
-
-                url: '/view-workers',
-                views: {
-                    'service-list': {
-                        templateUrl: 'templates/view-workers.html',
-                        controller: 'VWCtrl'
-                    }
-                }
-
-            })
-
             .state('tab.service-list', {
                 url: '/service-list',
                 views: {
@@ -136,17 +90,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
                     }
                 }
             })
-
-            .state('tab.price_cal', {
-                url: '/price_cal',
-                views: {
-                    'information': {
-                        templateUrl: 'templates/price-cal.html',
-                        controller: 'PriceCalCtrl'
-                    }
-                }
-            })
-
             .state('tab.feedback', {
                 url: '/feedback',
                 views: {
@@ -167,61 +110,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
                 }
             })
 
-            .state('tab.take-payment', {
-                url: '/take-payment',
-                views: {
-                    'information': {
-                        templateUrl: 'templates/take-payment.html',
-                        controller: 'TakePaymentCtrl'
-                    }
-                }
-            })
-            .state('tab.service-requests', {
-                url: '/service-requests',
-                views: {
-                    'information': {
-                        templateUrl: 'templates/service-requests.html',
-                        controller: 'ServiceRequestCtrl'
-                    }
-                }
-            })
-
-            .state('tab.worker-timer', { //8588824759
-                url: '/worker-timer',
-                views: {
-                    'information': {
-                        templateUrl: 'templates/worker-timer.html',
-                        controller: 'WorkerTimerCtrl'
-                    }
-                }
-            })
-
-            .state('tab.service-type', {
-                url: '/service-list/:id',
-                views: {
-                    'service-type': {
-                        templateUrl: 'templates/service-type.html',
-                        controller: 'ServiceTypeCtrl'
-                    }
-                }
-            })
-
             .state('tab.blueteam_verified', {
                 url: '/blueteam_verified',
                 views: {
                     'information': {
                         templateUrl: 'templates/blueteam_verified.html',
                         controller: 'BlueteamVerifiedTypeCtrl'
-                    }
-                }
-            })
-
-            .state('tab.book', {
-                url: '/service/:id/type/:type',
-                views: {
-                    'book': {
-                        templateUrl: 'templates/book.html',
-                        controller: 'BookCtrl'
                     }
                 }
             })
@@ -256,41 +150,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
                 }
             })
 
-            .state('finish', {
-                url: '/finish',
-
-                templateUrl: 'finish.html',
-                controller: 'FinishCtrl'
-
-
-            })
-
-            .state('tab.addworker', {
-                url: '/addworker',
+            .state('tab.expanse', {
+                url: '/expanse',
                 views: {
-                    'information': {
-                        templateUrl: 'templates/add-worker.html',
-                        controller: 'AddWorkerCtrl'
-                    }
-                }
-            })
-
-            .state('tab.addvender', {
-                url: '/addvender',
-                views: {
-                    'information': {
-                        templateUrl: 'templates/add-vender.html',
-                        controller: 'AddWorkerCtrl'
-                    }
-                }
-            })
-
-            .state('tab.seerequest', {
-                url: '/seerequest',
-                views: {
-                    'information': {
-                        templateUrl: 'templates/see-request.html',
-                        controller: 'SeeRequestCtrl'
+                    'book': {
+                        templateUrl: 'templates/expanse.html',
+                        controller: 'ExpanseCtrl'
                     }
                 }
             })
@@ -311,3 +176,4 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         $urlRouterProvider.otherwise('/tab/service-list');
         //$urlRouterProvider.otherwise('/tab/worker-timer');
     });
+

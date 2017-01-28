@@ -1,14 +1,15 @@
 {
   "name": "ion-datetime-picker",
-  "version": "0.1.2",
+  "version": "0.4.4",
   "description": "Date and/or time picker for awesome ionic framework",
-  "main": [
-    "release/ion-datetime-picker.js",
-    "release/ion-datetime-picker.css"
+  "main": "release/ion-datetime-picker.min.js",
+  "files": [
+    "release"
   ],
   "scripts": {},
   "author": "https://github.com/katemihalikova, kate@katemihalikova.cz",
   "license": "MIT",
+  "repository": "katemihalikova/ion-datetime-picker",
   "dependencies": {},
   "devDependencies": {
     "gulp": "^3.9.0",

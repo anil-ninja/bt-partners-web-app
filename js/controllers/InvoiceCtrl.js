@@ -4,7 +4,7 @@
 angular.module('starter.controllers')
 
     .controller('InvoiceCtrl', function ($scope, $state, $ionicLoading, $timeout, $ionicHistory, $stateParams,
-                                         $cordovaGeolocation, $localstorage,  $cordovaToast, BlueTeam) {
+                                         $cordovaGeolocation, $localstorage, $cordovaDevice, $cordovaToast, BlueTeam) {
         //for datetime picker
         console.log("start book ctrl");
         $scope.data = {};
@@ -20,7 +20,9 @@ angular.module('starter.controllers')
         $scope.user_id = $localstorage.get('user_id');
         $scope.services = JSON.parse($localstorage.get('services'));
 
-        $scope.data.service_id = $scope.services[0].service_id;
+        console.log($localstorage.get('services'));
+
+        $scope.data.service_id = $scope.services[0].id;
 
         $scope.position = {
             "coords": {
@@ -83,8 +85,8 @@ angular.module('starter.controllers')
                     "user_id": $localstorage.get('user_id'),
                     "user_type": $localstorage.get('type'),
                     "amount": $scope.data.amount,
-                    "service_tax": "yes"/*,
-                    "device_id": $cordovaDevice.getUUID()*/
+                    "service_tax": "yes",
+                    "device_id": $cordovaDevice.getUUID()
 
                 })
                 .then(function (d) {

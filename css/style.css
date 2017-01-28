@@ -1,202 +1,110 @@
 /* Empty. Add your own CSS if you like */
-
-
-
-a {
-    text-decoration: none !important;
-}
-
-.gallery {
-    -webkit-flex-wrap: wrap;
-    flex-wrap: wrap;
-}
-
-.pull-right{
-    float: right;
-}
-.button-halfwidth{
-    width: 49%;
-}
-.button-fullwidth{
+#map {
     width: 100%;
+    height: 100%;
 }
 
-/* CORE */
-.item-expand {
-    position: relative;
-    width: 100%;
-    max-height: 60px;
-    transition: max-height 0.1s ease-out;
-    overflow: hidden;
+.scroll {
+    height: 100%;
 }
 
-.item-expand.inactive:after {
-    content: "";
+#map .centerMarker {
     position: absolute;
-    bottom: 0px;
-    left: 0;
-    height: 15px;
-    width: 100%;
-    display: block;
-    background-image: -webkit-gradient(
-            linear,
-            left top,
-            left bottom,
-            color-stop(0, rgba(255, 255, 255, 0)),
-            color-stop(1, rgba(255, 255, 255, 1))
-    );
-    background-image: -o-linear-gradient(bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
-    background-image: -moz-linear-gradient(bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
-    background-image: -webkit-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
-    background-image: -ms-linear-gradient(bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+    /*url of the marker*/
+    background: url(http://maps.gstatic.com/mapfiles/markers2/marker.png) no-repeat;
+    /*center the marker*/
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    /*fix offset when needed*/
+    margin-left: -10px;
+    margin-top: -34px;
+    /*size of the image*/
+    height: 34px;
+    width: 20px;
+    cursor: pointer;
 }
 
-.item-expand.active {
-    max-height: 200px;
-    transition: max-height 0.3s ease-out;
-}
-
-
-/* DEMO */
-.item-expand-footer {
-    color: red;
+.controls {
     margin-top: 10px;
+    border: 1px solid transparent;
+    border-radius: 2px 0 0 2px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    height: 32px;
+    outline: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
-.item-expand-footer i {
-    margin-right: 10px;
-}
-
-#countup p {
-    display: inline-block;
-    padding: 5px;
-    background: #FFA500;
-    margin: 0 0 20px;
-}
-
-.mynavbar{
-    height: 100px !important;
-}
-
-.has-header {
-    top: 100px;
-}
-
-ul.rating li {
-    display: inline;
-    border: 0px;
-    background: none;
-    padding: 5px 10px;
-}
-ul.rating li i {
-    font-size: 30px;
-}
-
-.item .row, .item .col {
-    padding: 0;
-}
-
-#profile-bg {
-    position: fixed;
-    left: 0;
-    top: 44px;
-    width: 100%;
-    height: 150px;
-
-    /*     background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/94311/bg.jpg') no-repeat transparent;*/
-    background-size: 100%;
-    background-position: 50% 20%;
-
-    text-align: center;
-}
-
-#content {
-    position: relative;
-    margin-top: 150px;
-    background-color: white;
-    box-shadow: 0px -1px 10px rgba(0,0,0,0.4);
-    padding-top: 200px;
-}
-
-#profile-info {
-    position: absolute;
-    top: -95px;
-    width: 100%;
-    z-index: 2;
-    text-align: center;
-}
-#profile-name {
-    color: #444;
-    font-size: 26px;
-}
-#profile-description {
+#pac-input {
+    background-color: #fff;
+    font-family: Roboto;
     font-size: 15px;
-    color: #888;
-}
-#profile-description a {
-    color: #888;
-}
-
-#profile-image {
-    display: block;
-    border-radius: 100px;
-    border: 1px solid #fff;
-    width: 128px;
-    height: 128px;
-    margin: 30px auto 0;
-    box-shadow: 0px 0px 4px rgba(0,0,0,0.7);
+    font-weight: 300;
+    margin-left: 12px;
+    padding: 0 11px 0 13px;
+    text-overflow: ellipsis;
+    width: 150px;
 }
 
-.list-item-content {
-    padding: 5px;
+#pac-input:focus {
+    border-color: #4d90fe;
 }
 
-.list-item {
-    color: #666666;
+.pac-container {
+    font-family: Roboto;
 }
 
-.post {
-    color: #444;
+#type-selector {
+    color: #fff;
+    background-color: #4d90fe;
+    z-index: 1;
+    padding: 5px 11px 0px 11px;
 }
 
-.post-time {
-    position: absolute;
-    right: 5px;
-    top: 5px;
+#type-selector label {
+    font-family: Roboto;
+    font-size: 13px;
+    font-weight: 300;
+}
+#target {
+    width: 245px;
+}
+
+.error-container {
+    margin: 5px 0;
+}
+
+.error-container:last-child {
+    margin: 5px 0 0;
+}
+
+.error {
+    padding: 10px 16px;
+    font-family: "Arial Black", Gadget, sans-serif;
     font-size: 11px;
-    color: #888;
+    text-transform: uppercase;
+    color: #555;
+    vertical-align: middle;
 }
 
-.post-profile-image {
-    display: inline-block;
-    vertical-align: top;
-    width: 48px;
-    height: 48px;
-    margin-right: 10px;
-}
-.post-options {
-    position: absolute;
-    font-size: 16px;
-    right: 5px;
-    bottom: 5px;
-    color: #888;
+.error i {
+    font-size: 24px;
+    color: #B83E2C;
+    vertical-align: middle;
 }
 
-.header .col {
-    background-color:lightgrey;
+.last-error-container > .error {
+    padding: 10px 16px 0;
 }
 
-.col {
-    border: solid 1px grey;
-    border-bottom-style: none;
-    border-right-style: none;
+.has-errors {
+    border-bottom: 3px solid #B83E2C;
 }
 
-.col:last-child {
-    border-right: solid 1px grey;
+.no-errors {
+    border-bottom: 3px solid green;
 }
 
-.row:last-child .col {
-    border-bottom: solid 1px grey;
-}
+.bar-legend,.chart-legend,.doughnut-legend,.line-legend,.pie-legend,.polararea-legend,.radar-legend{list-style-type:none;margin-top:5px;text-align:center;-webkit-padding-start:0;-moz-padding-start:0;padding-left:0}.bar-legend li,.chart-legend li,.doughnut-legend li,.line-legend li,.pie-legend li,.polararea-legend li,.radar-legend li{display:inline-block;white-space:nowrap;position:relative;margin-bottom:4px;border-radius:5px;padding:2px 8px 2px 28px;font-size:smaller;cursor:default}.bar-legend-icon,.chart-legend-icon,.doughnut-legend-icon,.line-legend-icon,.pie-legend-icon,.polararea-legend-icon,.radar-legend-icon{display:block;position:absolute;left:0;top:0;width:20px;height:20px;border-radius:5px}
+/*# sourceMappingURL=angular-chart.min.css.map */

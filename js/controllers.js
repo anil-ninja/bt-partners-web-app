@@ -1,4 +1,4 @@
-angular.module('starter.controllers', ['ionic', 'ngCordova', 'ionic-timepicker', 'ion-datetime-picker', 'ionic.rating'])
+angular.module('starter.controllers', ['ionic', 'ngCordova', 'ionic-timepicker', 'ion-datetime-picker', 'ionic.rating','chart.js'])
 
 
     .controller('ServiceTypeCtrl', function ($scope, $state, $stateParams,BlueTeam) {
@@ -172,7 +172,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'ionic-timepicker',
 
 
     .controller('BookCtrl', function ($scope, $state, $ionicLoading, $timeout, $ionicHistory, $stateParams,
-                                      $cordovaGeolocation, $localstorage, BlueTeam) {
+                                      $cordovaGeolocation, $localstorage,  BlueTeam) {
         //for datetime picker
         console.log("start book ctrl");
         $scope.datetimeValue = new Date();

@@ -5,7 +5,7 @@ angular.module('starter.controllers')
 
 
     .controller('GetFeedbackCtrl', function ($scope, $state, $ionicLoading, $timeout, $ionicHistory, $stateParams,
-                                             $cordovaGeolocation, $localstorage,  $cordovaToast, BlueTeam) {
+                                             $cordovaGeolocation, $localstorage, $cordovaDevice, $cordovaToast, BlueTeam) {
         //for datetime picker
         console.log("start get feedback ctrl");
 
@@ -81,8 +81,8 @@ angular.module('starter.controllers')
                     "location": $scope.position.coords.latitude + ',' + $scope.position.coords.longitude,
                     "service_id": $scope.data.service_id,
                     "user_id": $localstorage.get('user_id'),
-                    "user_type": $localstorage.get('type')/*,
-                    "device_id": $cordovaDevice.getUUID()*/
+                    "user_type": $localstorage.get('type'),
+                    "device_id": $cordovaDevice.getUUID()
 
                 })
                 .then(function (d) {

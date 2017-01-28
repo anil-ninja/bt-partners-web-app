@@ -6,7 +6,9 @@ angular.module('starter.services', [])
         var url = "https://blueteam.in/api";
         var urlSP = "https://blueteam.in/sp_api";
         var urlWazir = "https://blueteam.in/wazir_api";
+        var monthlyIncome = {};
         return {
+
             getServices: function (type) {
                 // $http returns a promise, which has a then function, which also returns a promise
                 var promise = $http.get(url + '/services' + (type ? type : "")).then(function (response) {
@@ -190,16 +192,26 @@ angular.module('starter.services', [])
                 return promise;
             },
 
-            getMonthlyIncome: function (id) {
+            getMonthlyIncome: function (id,date) {
+                var str = (date == "")?"":"?date="+date;
                 // $http returns a promise, which has a then function, which also returns a promise
-                var promise = $http.get(urlSP + '/service_provider/'+ id + '/invoice').then(function (response) {
+                var promise = $http.get(urlSP + '/service_provider/'+ id + '/invoice'+str).then(function (response) {
                     // The then function here is an opportunity to modify the response
                     console.log(JSON.stringify(response));
                     // The return value gets picked up by the then in the controller.
+                    monthlyIncome = response.data;
                     return response.data;
                 });
+
                 // Return the promise to the controller
                 return promise;
+            },
+
+            getLocMonthlyIncome: function () {
+
+
+                // Return the promise to the controller
+                return monthlyIncome;
             },
 
             search: function (keywords) {
@@ -267,6 +279,19 @@ angular.module('starter.services', [])
                 return promise;
             },
 
+            sendExpanse: function (id,data) {
+                // $http returns a promise, which has a then function, which also returns a promise
+                console.log(JSON.stringify(data));
+                var promise = $http.post(urlSP + '/service_provider/'+id+'/expanse', data).then(function (response) {
+                    // The then function here is an opportunity to modify the response
+                    console.log(JSON.stringify(response));
+                    // The return value gets picked up by the then in the controller.
+                    return response.data;
+                });
+                // Return the promise to the controller
+                return promise;
+            },
+
             createCampaigningRequest: function (id,data) {
                 // $http returns a promise, which has a then function, which also returns a promise
                 console.log(JSON.stringify(data));
@@ -277,6 +302,17 @@ angular.module('starter.services', [])
                     return response.data;
                 });
                 // Return the promise to the controller
+                return promise;
+            },
+
+            getExpanseTypes: function (id) {
+                var promise = $http.get(urlSP + '/service_provider/'+ id + '/expanse_types').then(function (response) {
+
+                    console.log(JSON.stringify(response));
+
+                    return response.data;
+                });
+
                 return promise;
             },
 
@@ -304,7 +340,7 @@ angular.module('starter.services', [])
             },
 
             getLocationDetails: function (id) {
-                var promise = $http.get(urlWazir + '/location/-'+id).then(function (response) {
+                var promise = $http.get(urlSP + '/location/'+id).then(function (response) {
 
                     console.log(JSON.stringify(response));
 
@@ -319,6 +355,19 @@ angular.module('starter.services', [])
                 // $http returns a promise, which has a then function, which also returns a promise
                 console.log(JSON.stringify(data));
                 var promise = $http.post(url + '/meetings', data).then(function (response) {
+                    // The then function here is an opportunity to modify the response
+                    console.log(JSON.stringify(response));
+                    // The return value gets picked up by the then in the controller.
+                    return response.data;
+                });
+                // Return the promise to the controller
+                return promise;
+            },
+
+            updateSPLocation: function (id, data) {
+                // $http returns a promise, which has a then function, which also returns a promise
+                console.log(id,JSON.stringify(data));
+                var promise = $http.post(urlSP + '/service_provider/'+id, data).then(function (response) {
                     // The then function here is an opportunity to modify the response
                     console.log(JSON.stringify(response));
                     // The return value gets picked up by the then in the controller.
@@ -439,6 +488,14 @@ angular.module('starter.services', [])
                 });
                 // Return the promise to the controller
                 return promise;
+            },
+            uploadImg: function(id) {
+                var fileUrl = document.getElementById(id);
+                var data = new FormData();
+                data.append('fileToUpload', fileUrl.files[0]);
+                return $http.post("http://api.file-dog.shatkonlabs.com/files/rahul", data, { 
+                      transformRequest: angular.identity,
+                      headers: {'Content-Type': undefined} }).then(handleSuccess, handleError('Error uploading file'));
             }
         };
     })
