@@ -6649,13 +6649,13 @@ button.item.item-button-right {
   padding-top: 1px;
   padding-bottom: 1px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); }
-  /*.card .item {
+  .card .item {
     border-left: 0;
     border-right: 0; }
   .card .item:first-child {
     border-top: 0; }
   .card .item:last-child {
-    border-bottom: 0; }*/
+    border-bottom: 0; }
 
 .padding .card, .padding .list-inset {
   margin-left: 0;

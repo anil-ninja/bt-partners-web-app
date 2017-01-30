@@ -488,14 +488,6 @@ angular.module('starter.services', [])
                 });
                 // Return the promise to the controller
                 return promise;
-            },
-            uploadImg: function(id) {
-                var fileUrl = document.getElementById(id);
-                var data = new FormData();
-                data.append('fileToUpload', fileUrl.files[0]);
-                return $http.post("http://api.file-dog.shatkonlabs.com/files/rahul", data, { 
-                      transformRequest: angular.identity,
-                      headers: {'Content-Type': undefined} }).then(handleSuccess, handleError('Error uploading file'));
             }
         };
     })

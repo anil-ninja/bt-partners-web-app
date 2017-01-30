@@ -30,18 +30,24 @@
   <!-- ionic/angularjs js -->
   <script src="lib/ionic/js/ionic.bundle.js"></script>
 
-  <!-- — add more libraries →-->
+  <!---— add more libraries →-->
 
-  <script src="lib/ngstorage/ngStorage.min.js"></script>
+    <script src="lib/ngstorage/ngStorage.min.js"></script>
   <script src="lib/ngCordova/dist/ng-cordova.js"></script>
-  <script src="lib/angular-messages/angular-messages.min.js"></script>
+    <script src="lib/angular-messages/angular-messages.min.js"></script>
+
   <script src="lib/ionic-timepicker/dist/templates.js"></script>
   <script src="lib/ionic-timepicker/dist/ionic-timepicker.bundle.min.js"></script>
+
   <script src="lib/ion-datetime-picker/release/ion-datetime-picker.min.js"></script>
   <link href="lib/ion-datetime-picker/release/ion-datetime-picker.min.css" rel="stylesheet">
   <script src="lib/ionic-rating/ionic-rating.min.js"></script>
-  <script src="lib/byhand/Chart.min.js"></script>
-  <script src="lib/byhand/angular-chart.min.js"></script>
+    <script src="lib/byhand/Chart.min.js"></script>
+
+    <script src="lib/byhand/angular-chart.min.js"></script>
+
+
+
 
   <!-- your app's js -->
   <script src="js/app.js"></script>
@@ -55,26 +61,17 @@
   <script src="js/controllers/MonthlyIncomeCtrl.js"></script>
   <script src="js/controllers/RegCtrl.js"></script>
   <script src="js/controllers/MapCtrl.js"></script>
+
+
   <script src="js/services.js"></script><!--
   <script src="js/services/BlueTeamService.js"></script>
   <script src="js/services/BTPartnerService.js"></script>
   <script src="js/services/CallLogService.js"></script>
   <script src="js/services/LocalStorageService.js"></script>
   <script src="js/services/WazirService.js"></script>-->
-  <style type="text/css">
-    .inputstl { 
-      padding: 9px;
-      margin :9px; 
-      border: solid 1px #4B718B; 
-      outline: 0; 
-      background: -webkit-gradient(linear, left top, left 25, from(#FFFFFF), color-stop(4%, #93EAED), to(#FFFFFF)); 
-      background: -moz-linear-gradient(top, #FFFFFF, #93EAED 1px, #FFFFFF 25px); 
-      box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px; 
-      -moz-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px; 
-      -webkit-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px; 
 
-    } 
-  </style>
+
+
 </head>
 <body ng-app="starter">
 <ion-pane>
@@ -82,19 +79,17 @@
     <ion-nav-back-button nav-direction="back">
     </ion-nav-back-button>
   </ion-nav-bar>
+
+
   <script type="text/ng-template" id="register.html">
     <ion-view hide-nav-bar="true" >
 
       <ion-content >
-        <div class="" >
-          <div style="text-align: center;"><img ng-src="img/login.png" class="img-rounded" style="max-width: 30%;" >
-            <p><i style="font-style: italic;font-size: 0.8em">Let's Grow with Technology</i></p>
-
-          </div>
-
-        </div>
-        <div style="text-align: center;"><h3>Partner Login/Signup</h3></div>
-        <!-- <div class="card" ng-hide="!basicRegDone">
+        <div class="card" style="background: url(./img/homepage.jpg) no-repeat 
+          center center fixed ; -webkit-background-size: cover;  -moz-background-size: cover;
+            -o-background-size: cover;   background-size: cover;;">
+        
+        <div  ng-hide="!basicRegDone" style="max-width: 40%;margin-left: 55%;margin-top: 80px;">
 
           Services Details
 
@@ -129,91 +124,118 @@
 
           </form>
 
-        </div> -->
-        <div class="card " ng-hide="basicRegDone">
+        </div>
+        <div  ng-hide="basicRegDone" style="max-width: 40%;margin-left: 55%;margin-top: 80px;">
 
           <form ng-submit="regUser()" name="register" >
-            <div class="list" style="width: 50%;margin-left: 24%;">
-              <label class="item item-input inputstl"
+
+              <div class="list">
+
+
+            <label class="item item-input"
                    ng-class="{ 'has-errors' : (register.mobile.$invalid || !v.mobile) ,
                                 'no-errors' : (!register.mobile.$invalid && v.mobile)}">
-                <span class="input-label" >Mobile*</span>
-                <input type="number" name="mobile" id="mobile" ng-keypress="valIP()"
+              <span class="input-label" >Mobile*</span>
+              <input type="number" name="mobile" id="mobile" ng-keypress="valIP()"
                      placeholder="Mobile" ng-model="user.mobile" ng-minlength="10" ng-maxlength="10" >
-              </label>
-              <div class="error-container" ng-messages="register.mobile.$error">
-                <div class="error" ng-message="required">
-                  <i class="ion-information-circled"></i>Mobile No is Required
-                </div>
-                <div class="error" ng-message="minlength">
-                  <i class="ion-information-circled"></i>Mobile No should be of min 10 digit
-                </div>
-                <div class="error" ng-message="maxlength">
-                  <i class="ion-information-circled"></i>Mobile No should be of max 10 digit
-                </div>
-              </div>
-              <label class="item item-input inputstl"
+            </label>
+
+                  <div class="error-container" ng-messages="register.mobile.$error">
+                      <div class="error" ng-message="required">
+                          <i class="ion-information-circled"></i>
+                          Mobile No is Required
+                      </div>
+                      <div class="error" ng-message="minlength">
+                          <i class="ion-information-circled"></i>
+                          Mobile No should be of min 10 digit
+                      </div>
+                      <div class="error" ng-message="maxlength">
+                          <i class="ion-information-circled"></i>
+                          Mobile No should be of max 10 digit
+                      </div>
+                  </div>
+
+
+            <label class="item item-input "
                    ng-class="{ 'has-errors' : (register.password.$invalid || !v.password),
                                 'no-errors' : (!register.password.$invalid && v.password)}">
-                <span class="input-label" >Password*</span>
-                <input type="password" name="password" id="password" ng-keypress="checkReg()" 
-                  ng-change="checkReg()" placeholder="Password" ng-model="user.password" 
-                  ng-minlength="6" ng-maxlength="12" >
-              </label>
-              <div class="error-container" ng-messages="register.password.$error">
-                <div class="error" ng-message="required">
-                  <i class="ion-information-circled"></i>Password is Required
-                </div>
-                <div class="error" ng-message="minlength">
-                  <i class="ion-information-circled"></i>Min length is 6
-                </div>
-                <div class="error" ng-message="maxlength">
-                  <i class="ion-information-circled"></i>Max length is 12
-                </div>
-              </div>
-              <label class="item item-input inputstl"  ng-hide="registered"
-                     ng-class="{ 'has-errors' : (register.conf_password.$invalid || !v.conf_password),
-                          'no-errors' : (!register.conf_password.$invalid && v.conf_password)}">
-                <span class="input-label" >Conf. Password*</span>
-                <input type="password" name="conf_password" id="conf_password" ng-change="valIP()"
-                  placeholder="Password" ng-model="user.conf_password" ng-minlength="6" 
-                  ng-maxlength="12" >
-              </label>
-              <div class="error-container" ng-messages="register.conf_password.$error">
-                <div class="error" ng-message="pw-check">
-                  <i class="ion-information-circled"></i> Min length is 6
-                </div>
-                <div class="error" ng-message="maxlength">
-                  <i class="ion-information-circled"></i> Max length is 12
-                </div>
-              </div>
+              <span class="input-label" >Password*</span>
+              <input type="password" name="password" id="password" ng-keypress="checkReg()" ng-change="checkReg()"
+                     placeholder="Password" ng-model="user.password" ng-minlength="6" ng-maxlength="12" >
+            </label>
 
-              <label class="item item-input inputstl" ng-hide="registered"
-                     ng-class="{ 'has-errors' : (register.name.$invalid || !v.name),
-                                  'no-errors' : (!register.name.$invalid && v.name)}" >
-                <span class="input-label" >Full Name*</span>
-                <input type="text"  name="name" id="name" ng-change="valIP()"
-                       placeholder="Full Name" ng-model="user.name" ng-minlength="6"  >
-              </label>
-              <div class="error-container" ng-messages="register.name.$error">
-                <div class="error" ng-message="minlength">
-                  <i class="ion-information-circled"></i> Min length is 6
-                </div>
-                <div class="error" ng-message="maxlength">
-                  <i class="ion-information-circled"></i>Max length is 12
-                </div>
-              </div>
-              <label class="item item-input inputstl" ng-hide="registered" >
-                <span class="input-label" >Organization</span>
-                <input type="text"  name="organization" id="organization" placeholder="name of organization, else blank if none" ng-model="user.organization" >
-              </label>
-            <!-- <div class="item " ng-hide="registered"
+                  <div class="error-container" ng-messages="register.password.$error">
+                      <div class="error" ng-message="required">
+                          <i class="ion-information-circled"></i>
+                          Password is Required
+                      </div>
+                      <div class="error" ng-message="minlength">
+                          <i class="ion-information-circled"></i>
+                          Min length is 6
+                      </div>
+                      <div class="error" ng-message="maxlength">
+                          <i class="ion-information-circled"></i>
+                          Max length is 12
+                      </div>
+                  </div>
+
+            <label class="item item-input "  ng-hide="registered"
+                   ng-class="{ 'has-errors' : (register.conf_password.$invalid || !v.conf_password),
+                        'no-errors' : (!register.conf_password.$invalid && v.conf_password)}">
+              <span class="input-label" >Conf. Password*</span>
+              <input type="password" name="conf_password" id="conf_password" ng-change="valIP()"
+                     placeholder="Password" ng-model="user.conf_password" ng-minlength="6" ng-maxlength="12" >
+            </label>
+                  <div class="error-container" ng-messages="register.conf_password.$error">
+
+
+                      <div class="error" ng-message="pw-check">
+                          <i class="ion-information-circled"></i>
+                          Min length is 6
+                      </div>
+                      <div class="error" ng-message="maxlength">
+                          <i class="ion-information-circled"></i>
+                          Max length is 12
+                      </div>
+                  </div>
+
+            <label class="item item-input " ng-hide="registered"
+                   ng-class="{ 'has-errors' : (register.name.$invalid || !v.name),
+                                'no-errors' : (!register.name.$invalid && v.name)}"                     >
+              <span class="input-label" >Full Name*</span>
+              <input type="text"  name="name" id="name" ng-change="valIP()"
+                     placeholder="Full Name" ng-model="user.name" ng-minlength="6"  >
+            </label>
+                  <div class="error-container" ng-messages="register.name.$error">
+
+                      <div class="error" ng-message="minlength">
+                          <i class="ion-information-circled"></i>
+                          Min length is 6
+                      </div>
+                      <div class="error" ng-message="maxlength">
+                          <i class="ion-information-circled"></i>
+                          Max length is 12
+                      </div>
+                  </div>
+
+            <label class="item item-input " ng-hide="registered"
+                   >
+              <span class="input-label" >Organization</span>
+              <input type="text"  name="organization" id="organization"
+                     placeholder="name of organization, else blank if none" ng-model="user.organization"  >
+            </label>
+
+
+
+            <div class="item " ng-hide="registered"
                  ng-class="{ 'has-errors' : (user.profile_pic_id == 0), 'no-errors' : (user.profile_pic_id != 0)}">
-              <span class="input-label" >Profile Pic*</span>
-              
-              <input type="file" name="profile_pic_id" id="profile_pic_id" class="form-control" file-model="user.profile_pic_id" />
+              Profile Pic*
+              <a class="button pull-right"  ng-click="takePicture();"><span
+                      class="icon ion-android-camera large calm"></span></a>
+              <a class="button pull-right" ng-click="selectPicture()"><span
+                      class="icon ion-images large calm"></span></a>
               <i class="icon ion-checkmark-circled balanced" ng-show="(user.profile_pic_id != 0)"></i>
-            </div> -->
+            </div>
 
             <!--<label class="item item-input " ng-hide="registered" >
 
@@ -222,22 +244,28 @@
                        placeholder="Address" ng-model="user.address" >
             </label>
 -->
-              <label class="item item-input inputstl" ng-hide="registered"
-                     ng-class="{ 'has-errors' : (register.experience.$invalid || !v.experience) ,
-                                      'no-errors' : (!register.experience.$invalid && v.experience) }">
-                <span class="input-label" >Experience*</span>
-                <input type="number" name="experience" id="experience" ng-change="valIP()"
-                  placeholder="in months" ng-model="user.experience" ng-minlength="1" ng-maxlength="2">
-              </label>
-              <div class="error-container" ng-messages="register.experience.$error">
-                <div class="error" ng-message="minlength">
-                  <i class="ion-information-circled"></i>Min length is 1, In months
-                </div>
-                <div class="error" ng-message="maxlength">
-                  <i class="ion-information-circled"></i>Max length is 99, In months
-                </div>
-              </div>
-            <!-- <label class="item item-input item-select" ng-hide="registered"
+            <label class="item item-input " ng-hide="registered"
+                   ng-class="{ 'has-errors' : (register.experience.$invalid || !v.experience) ,
+                                    'no-errors' : (!register.experience.$invalid && v.experience) }">
+              <span class="input-label" >Experience*</span>
+              <input type="number" name="experience" id="experience" ng-change="valIP()"
+                     placeholder="in months" ng-model="user.experience" ng-minlength="1" ng-maxlength="2">
+            </label>
+                  <div class="error-container" ng-messages="register.experience.$error">
+
+                      <div class="error" ng-message="minlength">
+                          <i class="ion-information-circled"></i>
+                          Min length is 1, In months
+                      </div>
+                      <div class="error" ng-message="maxlength">
+                          <i class="ion-information-circled"></i>
+                          Max length is 99, In months
+                      </div>
+                  </div>
+
+
+
+            <label class="item item-input item-select" ng-hide="registered"
                    ng-class="{ 'has-errors' : !v.services, 'no-errors' : v.services}">
               <div class="input-label">
                 Service*
@@ -249,12 +277,16 @@
                 </option>
 
               </select>
-            </label> -->
-              <label class="item item-input inputstl" ng-hide=registered >
-                <span class="input-label" >Coupon Code</span>
-                <input type="text"  name="coupon" placeholder="eg. rahu#97" ng-model="user.coupon"  >
-              </label>
-              <div class="padding">
+            </label>
+
+                  <label class="item item-input " ng-hide=registered >
+                      <span class="input-label" >Coupon Code</span>
+                      <input type="text"  name="coupon"
+                             placeholder="eg. rahu#97" ng-model="user.coupon"  >
+                  </label>
+
+
+            <div class="padding">
 
                      <!--   <span class="item item-assertive msg-error" ng-show="error">
                             {{error}}
@@ -268,15 +300,30 @@
                 <p class="item item-assertive" ng-show="register.mobile.$error.minlength || register.mobile.$error.maxlength" >Mobile No. should be of 10 digit.</p>
 
               </div>-->
-                <div class="button-bar">
-                  <input class="button button-calm" type="submit" name="submit" value="{{ registered?'Login':'Register'}}" nav-direction="forward" ng-disabled="(!goReg ||  !goLogin || register.$invalid  )">
-                  <button class="button button-outline button-energized"
+
+
+              <div class="button-bar">
+                <input class="button button-calm"
+                       type="submit" name="submit" value="{{ registered?'Login':'Register'}}" nav-direction="forward" ng-disabled="(!goReg ||  !goLogin || register.$invalid  )">
+                <button class="button button-outline button-energized"
                         ng-click="registered=!registered;" >{{ registered?'Register':'Login'}}</button>
-                </div>
               </div>
             </div>
+
+
+                  </div>
+
           </form>
         </div>
+        <div style="max-width: 40%;margin-left: 5%;margin-top: -20%;">
+          
+          <div style="text-align: center;"><img ng-src="img/login.png" class="img-rounded" style="max-width: 100%;" >
+            <p><i style="font-style: italic;font-size: 0.8em">Let's Grow with Technology</i></p>
+
+          </div>
+          <div style="text-align: center;"><h3>Partner Login/Signup</h3></div>
+        </div>
+        
         <div class='card'>
           <div class="item item-text-wrap">
             <div style="text-align: center;">
@@ -289,10 +336,12 @@
                    onclick="window.open('mailto:info@blueteam.in','_system')"> Email</a>
                 <a class="button button-small button-full ion-cloud"
                    onclick="window.open('http://www.BlueTeam.in','_system')"> Web</a>
+
               </div>
             </div>
           </div>
         </div>
+      </div>
       </ion-content>
     </ion-view>
 
@@ -319,8 +368,12 @@
           async defer></script>
 
   <ion-nav-view>
+
+
   </ion-nav-view>
 </ion-pane>
+
+
 <script src="cordova.js"></script>
 </body>
 </html>

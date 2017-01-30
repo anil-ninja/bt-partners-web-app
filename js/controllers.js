@@ -26,7 +26,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'ionic-timepicker',
     })
 
     .controller('FinishCtrl', function ($scope, $state, $window, $ionicHistory, $timeout, $stateParams, $ionicLoading, $timeout,
-                                        $localstorage,  BlueTeam) {
+                                        $localstorage, $cordovaDevice, BlueTeam) {
         //hi, I am Vikas Nagar. I got assigned as your CEM (Client Engagement Manager).
         // I need to make sure you don't face any problem in process of taking service from BlueTeam.
         // I want to meet regarding this Service Request, which you have just given.
@@ -88,8 +88,8 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'ionic-timepicker',
                         "user_type": $localstorage.get('type'),
                         "data_time": $scope.data.drv + "",
                         "address": $scope.data.address,
-                        "cem_id": $scope.data.cem_id/*,
-                        "device_id": $cordovaDevice.getUUID()*/
+                        "cem_id": $scope.data.cem_id,
+                        "device_id": $cordovaDevice.getUUID()
                     }
                 })
                 .then(function (d) {
@@ -172,7 +172,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'ionic-timepicker',
 
 
     .controller('BookCtrl', function ($scope, $state, $ionicLoading, $timeout, $ionicHistory, $stateParams,
-                                      $cordovaGeolocation, $localstorage,  BlueTeam) {
+                                      $cordovaGeolocation, $localstorage, $cordovaDevice, BlueTeam) {
         //for datetime picker
         console.log("start book ctrl");
         $scope.datetimeValue = new Date();
@@ -289,8 +289,8 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'ionic-timepicker',
                         "end_time": $scope.data.endTime,
                         "address": $scope.data.address,
                         "remark": $scope.data.remark,
-                        "priority": "" + 3/*,
-                        "device_id": $cordovaDevice.getUUID()*/
+                        "priority": "" + 3,
+                        "device_id": $cordovaDevice.getUUID()
                     }
                 })
                 .then(function (d) {
